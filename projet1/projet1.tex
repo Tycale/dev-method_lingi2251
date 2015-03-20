@@ -122,33 +122,16 @@ What are the steps to create a billing account number ?
     \item \data{Dollars} [positive float, max 999,99] : Dollar amount of the purchase (from the Gas pump).
     \item \data{Payment Token} [integer representing a {valid, invalid} payment] : Token giving information about the payment (from the Credit Card System).
     \item \data{Reset Token} [integer representing a reset operation] : When the token is received , the pump is reseted.
-    \item \data{User input} [User choice] : The user can communicate his choice of payment.
+    \item \data{User input} [User choices] : The user can communicate his choice of payment.
     \end{itemize}
 
 \item Output :
 		\begin{itemize}
 		\item \data{User output} [Strings] : Messages on the screen to guide the user through steps.
     \item \data{Gallons} [positive float] : Number of gallons purchased (to the cashier interface).
-    \item \data{Dollars} [positive float, max 999,99] : Dollar amount of the purchase (to the cashier interface and to the card reader).
+    \item \data{Dollars} [positive float, max 999,99] : Dollar amount of the purchase (to the cashier interface and to the card reader system).
 		\end{itemize}
 \end{itemize}
-
-
-
-\subsection{GSCS}
-
-\begin{itemize}
-\item Input :
-		\begin{itemize}
-		\item 
-		\end{itemize}
-
-\item Output :
-		\begin{itemize}
-		\item 
-		\end{itemize}
-\end{itemize}
-
 
 
 \subsection{Credit card reader}
@@ -156,13 +139,13 @@ What are the steps to create a billing account number ?
 \begin{itemize}
 \item Input :
 		\begin{itemize}
-		\item \data{credit car number} : credit car number read.
+		\item \data{Credit card number} : credit card number read.
 		\end{itemize}
 
 \item Output :
 		\begin{itemize}
-		\item \data{credit card number} : send the credit car number to the GSCS.
-		\item \data{invalid token} : send an invalid token to the GSCS if the credit card number cannot be read correctly.
+		\item \data{Credit card number} : send the credit car number to the gas pump interface.
+		\item \data{Invalid token} : send an invalid token to the gas pump interface if the credit card number cannot be read correctly.
 		\end{itemize}
 \end{itemize}
 
@@ -173,8 +156,8 @@ What are the steps to create a billing account number ?
 \begin{itemize}
 \item Input :
 		\begin{itemize}
-		\item \data{credit card number} : receive the credit card number from the GSCS.
-		\item \data{purchase amount} : receive the purchase amount from the GSCS.
+		\item \data{credit card number} : receive the credit card number from the gas pump interface.
+		\item \data{purchase amount} : receive the purchase amount from the gas pump interface.
 		\end{itemize}
 \end{itemize}
 
@@ -216,6 +199,7 @@ What are the steps to create a billing account number ?
 		\begin{itemize}
 		\item \data{display purchase price} : display the purchase price (if the payment is to be made by cash, or by monthly bill).
 		\item \data{display error message} : display an error message if the billing account number entered is invalid.
+    \item \data{Reset Token} [integer representing a reset operation] : When the token is received , the pump is reseted.
 		\end{itemize}
 \end{itemize}
 
