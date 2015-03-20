@@ -36,6 +36,8 @@
 \newcommand{\tbf}[1]{\textbf{#1}}
 \newcommand{\tit}[1]{\textit{#1}}
 
+\newcommand{\data}[1]{\textit{#1}}
+
 \newcommand{\pyl}{\textsf{Pylint}}
 
 
@@ -97,12 +99,13 @@
 \begin{itemize}
 \item Input :
 		\begin{itemize}
-		\item 
+		\item The trigger is pressed
 		\end{itemize}
 
 \item Output :
 		\begin{itemize}
-		\item 
+		\item \data{Gallons} [positive float] : Number of gallons purchased. 
+    \item \data{Dollars} [positive float, max 999,99] : Dollar amount of the purchase.
 		\end{itemize}
 \end{itemize}
 
@@ -113,12 +116,18 @@
 \begin{itemize}
 \item Input :
 		\begin{itemize}
-		\item 
-		\end{itemize}
+    \item \data{Gallons} [positive float] : Number of gallons purchased (from the Gas pump).
+    \item \data{Dollars} [positive float, max 999,99] : Dollar amount of the purchase (from the Gas pump).
+    \item \data{Payment Token} [integer representing a {valid, invalid} payment] : Token giving information about the payment (from the Credit Card System).
+    \item \data{Reset Token} [integer representing a reset operation] : When the token is received , the pump is reseted.
+    \item \data{User input} [User choice] : The user can communicate his choice of payment.
+    \end{itemize}
 
 \item Output :
 		\begin{itemize}
-		\item 
+		\item \data{User output} [Strings] : Messages on the screen to guide the user through steps.
+    \item \data{Gallons} [positive float] : Number of gallons purchased (to the cashier interface).
+    \item \data{Dollars} [positive float, max 999,99] : Dollar amount of the purchase (to the cashier interface and to the card reader).
 		\end{itemize}
 \end{itemize}
 
