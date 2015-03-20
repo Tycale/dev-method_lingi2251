@@ -36,7 +36,7 @@
 \newcommand{\tbf}[1]{\textbf{#1}}
 \newcommand{\tit}[1]{\textit{#1}}
 
-\newcommand{\pyl}{\textsf{Pylint}}
+\newcommand{\data}[1]{\textit{#1}}
 
 
 \def\blurb{\textsc{Université catholique de Louvain\\
@@ -145,12 +145,13 @@
 \begin{itemize}
 \item Input :
 		\begin{itemize}
-		\item 
+		\item \data{credit car number} : credit car number read.
 		\end{itemize}
 
 \item Output :
 		\begin{itemize}
-		\item 
+		\item \data{credit card number} : send the credit car number to the GSCS.
+		\item \data{invalid token} : send an invalid token to the GSCS if the credit card number cannot be read correctly.
 		\end{itemize}
 \end{itemize}
 
@@ -161,12 +162,8 @@
 \begin{itemize}
 \item Input :
 		\begin{itemize}
-		\item 
-		\end{itemize}
-
-\item Output :
-		\begin{itemize}
-		\item 
+		\item \data{credit card number} : receive the credit card number from the GSCS.
+		\item \data{purchase amount} : receive the purchase amount from the GSCS.
 		\end{itemize}
 \end{itemize}
 
@@ -177,12 +174,13 @@
 \begin{itemize}
 \item Input :
 		\begin{itemize}
-		\item 
+		\item \data{cash} [positive float] : receive cash payments from customers.
 		\end{itemize}
 
 \item Output :
 		\begin{itemize}
-		\item 
+		\item \data{change} [positive float] : give money as change for the payment.
+		\item \data{payment complete} : indicate that the payment is complete to the cashier's interface.
 		\end{itemize}
 \end{itemize}
 
@@ -193,12 +191,20 @@
 \begin{itemize}
 \item Input :
 		\begin{itemize}
-		\item 
+		\item \data{type of payment} : the cashier indicates whether : 
+					\begin{itemize}
+					\item the payment has to be added to a monthly bill.
+					\item the payment is done by credit card.
+					\end{itemize}
+		\item \data{billing account number} : the cashier enters the billing account number of the customer if the payment is to be made by monthly bill.
+		\item \data{credit card account number} : the cashier enters the credit card account number if the customer pays by credit card.
+		\item \data{payment complete} : the cashier indicates that the payment is complete.
 		\end{itemize}
 
 \item Output :
 		\begin{itemize}
-		\item 
+		\item \data{display purchase price} : display the purchase price (if the payment is to be made by cash, or by monthly bill).
+		\item \data{display error message} : display an error message if the billing account number entered is invalid.
 		\end{itemize}
 \end{itemize}
 
