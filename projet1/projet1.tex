@@ -90,6 +90,9 @@
 
 \section{Requirement issues}
 
+What are the steps to create a billing account number ?
+
+
 \section{Interfaces}
 
 \subsection{Gas pump}
@@ -211,6 +214,23 @@
 
 
 \section{State of the system}
+
+The GSCS stores the following data :
+\begin{itemize}
+\item Related to the gas station :
+		\begin{itemize}
+		\item \data{gallons purchased}
+		\item \data{purchase amount}
+		\end{itemize}
+
+\item Related to the customers :
+		\begin{itemize}
+		\item \data{Personal informations} : name, address, phone number, billing account number.
+		\item \data{Purchase informations} : how many gallons, the purchase amount, and the date.
+		\item \data{Purchase status} : does the customer have a due amount, type of payment, date of the purchase, date of the payment.
+		\end{itemize}
+\end{itemize}
+
 
 \section{Data-flow diagram}
 
