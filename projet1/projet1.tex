@@ -37,6 +37,7 @@
 \newcommand{\tit}[1]{\textit{#1}}
 
 \newcommand{\data}[1]{\textit{#1}}
+\newcommand{\state}[1]{\textsf{#1}}
 
 
 
@@ -95,17 +96,19 @@
 
 \item In the requirements, the term \textit{GSCS} is used a lot of time. We don't know if this term refers to a kind of interface or if it refers to the whole system. We'll assume that it refers to the whole system and that the cashier interface is responsible of saving all informations (does include a database).
 
-\item There is no information that indicates how the cashier knows the price that the customer has to pay at the pump. We will therefore assume that the cashier is able to have an overview of all pumps (ie. pumps send their states and informations to the cashier interface).
+\item There is no information that indicates how the cashier knows the price that the customer has to pay at the pump. We will therefore assume that the cashier is able to have an overview of all pumps (i.e. pumps send their states and informations to the cashier's interface).
 
-\item We'll assume that the cashier interface does include a credit card reader. This could be used by the customer to pay a monthly bill, since the requirement tell us that \enquote{customers can always pay via cash or credit card}.
+\item We'll assume that the cashier's interface does include a credit card reader. This could be used by the customer to pay a monthly bill, since the requirement tells that \enquote{customers can always pay via cash or credit card}.
 
-\item What are the steps to create a monthly billing account number ? We'll assume that the customer have to ask the cashier for creating a monthly billing account.
+\item What are the steps to create a monthly billing account number ? We'll assume that the customer has to ask the cashier for creating a monthly billing account.
 
-\item \enquote{the paper credit card receipt will be photocopied and stored with the rest of the year’s receipts}. This action can not be handled by a computer system.. This action have to be managed by the cashier. We can think of being able to save the scan of the credit card receipt in the database of the system via the cashier interface. We do not take into account this sentence.
+\item ``the paper credit card receipt will be photocopied and stored with the rest of the year’s receipts''. This action can not be handled by a computer system.. This action has to be managed by the cashier.
 
 \end{itemize}
 
 
+
+\newpage
 \section{Interfaces}
 
 \subsection{Gas pump}
@@ -113,17 +116,18 @@
 \begin{itemize}
 \item Input :
 		\begin{itemize}
-		\item The trigger is pressed
+		\item The trigger is pressed.
 		\end{itemize}
 
 \item Output :
 		\begin{itemize}
 		\item \data{Gallons} [positive float] : Number of gallons purchased. 
-    \item \data{Dollars} [positive float, max 999,99] : Dollar amount of the purchase.
+    \item \data{Dollars} [positive float; max 999,99] : Dollar amount of the purchase.
 		\end{itemize}
 \end{itemize}
 
 
+\bigskip
 
 \subsection{Gas pump interface}
 
@@ -133,19 +137,21 @@
     \item \data{Gallons} [positive float] : Number of gallons purchased (from the Gas pump).
     \item \data{Dollars} [positive float, max 999,99] : Dollar amount of the purchase (from the Gas pump).
     \item \data{Payment Token} [integer representing a {valid, invalid} payment] : Token giving information about the payment (from the Credit Card System).
-    \item \data{Reset Token} [integer representing a reset operation] : When the token is received , the pump is reseted.
+    \item \data{Reset Token} [integer representing a reset operation] : When the token is received, the pump is reset.
     \item \data{User input} [User choices] : The user can communicate his choice of payment.
     \end{itemize}
 
 \item Output :
 		\begin{itemize}
 		\item \data{User output} [Strings] : Messages on the screen to guide the user through steps.
-    \item \data{Gallons} [positive float] : Number of gallons purchased (to the cashier interface).
-    \item \data{Dollars} [positive float, max 999,99] : Dollar amount of the purchase (to the cashier interface and to the card reader system).
+    \item \data{Gallons} [positive float] : Number of gallons purchased (to the cashier's interface).
+    \item \data{Dollars} [positive float, max 999,99] : Dollar amount of the purchase (to the cashier's interface and to the card reader system).
 		\end{itemize}
 \end{itemize}
 
 
+
+\newpage
 \subsection{Credit card reader}
 
 \begin{itemize}
@@ -162,6 +168,7 @@
 \end{itemize}
 
 
+\bigskip
 
 \subsection{Credit card system}
 
@@ -179,6 +186,7 @@
 \end{itemize}
 
 
+\bigskip
 
 \subsection{Cashier}
 
@@ -197,6 +205,7 @@
 
 
 
+\newpage
 \subsection{Cashier's interface}
 
 \begin{itemize}
@@ -215,13 +224,14 @@
 \item Output :
 		\begin{itemize}
 		\item \data{display purchase prices} : display the purchase prices.
-		\item \data{display error messages} : display an error messages (eg. if the billing account number entered is invalid).
+		\item \data{display error messages} : display an error messages (e.g. if the billing account number entered is invalid).
     \item \data{Reset Token} [integer representing a reset operation] : when the token is sent to a pump, the pump is reset.
     \item Save every purchase in a database.
 		\end{itemize}
 \end{itemize}
 
 
+\bigskip
 
 \section{State of the system}
 
@@ -276,26 +286,55 @@ Typically, the customer pumps some gas. He then chooses the payment method from 
 
 \newpage
 
+
 \subsection{The cashier successfully processes a monthly payment by credit card}
 
-% monhtly_credit_card.pdf
+\begin{center}
+\includegraphics[width=17cm, height=8cm, angle=90]{monhtly_credit_card.pdf}
+\end{center}
+
 
 \newpage
 
 \section{State diagrams}
 
-\begin{figure}[h]
-\centering
+\subsection{Gas Pump Interface}
+
+\begin{center}
 \includegraphics[width=\textwidth]{GasPumpInterface_diagram.pdf}
-\caption{State diagram -- Gas Pump Interface}
-\end{figure}
+\end{center}
 
-\bigskip \bigskip \bigskip
 
-\begin{figure}[h]
-\centering
+\subsubsection*{Description}
+
+The start state of the Gas pump interface (GPI) is \state{Waiting}.
+After the customer has used the pump to purchase gasoline, the GPI displays a menu for the customer to select the payment type.
+If the payment is done by monthly bill, the GPI goes back to \state{Waiting} state.
+If the customer choose to pay by credit card and that the credit card number is valid, it is sent to the credit card system and the GPI goes back to \state{Waiting} state.
+
+
+\medskip
+
+\subsection{Cashier's interface}
+
+\begin{center}
 \includegraphics[width=\textwidth]{CashierInterface_diagram.pdf}
-\caption{State diagram -- Cashier's interface}
-\end{figure}
+\end{center}
+
+\subsubsection*{Description}
+
+The start state of the Cashier's interface (CI) is \state{Display home menu}.
+If the customer wants to pay a monthly bill, the cashier has to enter the billing account number.
+
+
+
+\section{Conclusion}
+
+For this assignment, we had to make an analysis of the Dinoco Gas Station Control System in order to develop a software system for the gas stations.
+This assignment required to proceed the analysis in various steps.
+We needed to read carefully the requirements in order to understand how the system is intended to work.
+Even if the system to build is not very complex, making the analysis was not an easy task.
+But now, we have a better understanding of the concepts that are involved.
+
 
 \end{document}
