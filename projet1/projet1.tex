@@ -91,7 +91,19 @@
 
 \section{Requirement issues}
 
-What are the steps to create a billing account number ?
+\begin{itemize}
+
+\item In the requirements, the term \textit{GSCS} is used a lot of time. We don't know if this term refers to a kind of interface or if it refers to the whole system. We'll assume that it refers to the whole system and that the cashier interface is responsible of saving all informations (does include a database).
+
+\item There is no information that indicates how the cashier knows the price that the customer has to pay at the pump. We will therefore assume that the cashier is able to have an overview of all pumps (ie. pumps send their states and informations to the cashier interface).
+
+\item We'll assume that the cashier interface does include a credit card reader. This could be used by the customer to pay a monthly bill, since the requirement tell us that \enquote{customers can always pay via cash or credit card}.
+
+\item What are the steps to create a monthly billing account number ? We'll assume that the customer have to ask the cashier for creating a monthly billing account.
+
+\item \enquote{the paper credit card receipt will be photocopied and stored with the rest of the year’s receipts}. This requirement is ambiguous. This action have to be managed by the cashier. We can think of being able to save the scan of the credit card receipt in the database of the system via the cashier interface.
+
+\end{itemize}
 
 
 \section{Interfaces}
@@ -197,9 +209,10 @@ What are the steps to create a billing account number ?
 
 \item Output :
 		\begin{itemize}
-		\item \data{display purchase price} : display the purchase price (if the payment is to be made by cash, or by monthly bill).
-		\item \data{display error message} : display an error message if the billing account number entered is invalid.
-    \item \data{Reset Token} [integer representing a reset operation] : when the token is received, the pump is reset.
+		\item \data{display purchase prices} : display the purchase prices.
+		\item \data{display error messages} : display an error messages (eg. if the billing account number entered is invalid).
+    \item \data{Reset Token} [integer representing a reset operation] : when the token is sent to a pump, the pump is reset.
+    \item Save every purchase in a database.
 		\end{itemize}
 \end{itemize}
 
