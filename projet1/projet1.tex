@@ -37,6 +37,7 @@
 \newcommand{\tit}[1]{\textit{#1}}
 
 \newcommand{\data}[1]{\textit{#1}}
+\newcommand{\state}[1]{\textsf{#1}}
 
 
 
@@ -279,18 +280,33 @@ Typically, the customer trigger the pumping gas. It then chooses the payment met
 \newpage
 \section{State diagrams}
 
-\begin{figure}[h]
-\centering
+\subsection{Gas Pump Interface}
+
+\begin{center}
 \includegraphics[width=\textwidth]{GasPumpInterface_diagram.pdf}
-\caption{State diagram -- Gas Pump Interface}
-\end{figure}
+\end{center}
 
-\bigskip \bigskip \bigskip
 
-\begin{figure}[h]
-\centering
+\subsubsection*{Description}
+
+The start state of the Gas pump interface (GPI) is \state{Waiting}.
+After the customer has used the pump to purchase gasoline, the GPI displays a menu for the customer to select the payment type.
+If the payment is done by monthly bill, the GPI goes back to \state{Waiting} state.
+If the customer choose to pay by credit card and that the credit card number is valid, it is sent to the credit card system and the GPI goes back to \state{Waiting} state.
+
+
+\medskip
+
+\subsection{Cashier's interface}
+
+\begin{center}
 \includegraphics[width=\textwidth]{CashierInterface_diagram.pdf}
-\caption{State diagram -- Cashier's interface}
-\end{figure}
+\end{center}
+
+\subsubsection*{Description}
+
+The start state of the Cashier's interface (CI) is \state{Display home menu}.
+If the customer wants to pay a monthly bill, the cashier has to enter the billing account number.
+
 
 \end{document}
