@@ -243,10 +243,10 @@ The GSCS stores the following data :
 \end{itemize}
 
 
-
+\newpage
 \section{Data-flow diagram}
 
-Typically, the customer trigger the pumping gas. It then chooses the payment method. According to his choice, he ends up paying or giving his billing number to the cashier.
+Typically, the customer pumps some gas. He then chooses the payment method from the gas pump interface. According to his choice, he ends up paying or giving his billing number to the cashier.
 
 \begin{center}
 \centerline{\includegraphics[width=1.4\textwidth]{dataflow_diagram.pdf}}
@@ -254,16 +254,15 @@ Typically, the customer trigger the pumping gas. It then chooses the payment met
 
 \section{Class diagram}
 
-\begin{figure}[h]
-\centering
-\includegraphics[width=\textwidth]{Class_diagram.pdf}
-\caption{Class diagram}
-\end{figure}
+\begin{center}
+\centerline{\includegraphics[width=1.3\textwidth]{Class_diagram.pdf}}
+\end{center}
 
 
 \section{Sequence diagrams}
 
 \subsection{A customer successfully purchases gas and charges it on a monthly bill}
+
 
 \begin{center}
 \includegraphics[width=17cm, angle=90]{SequenceDiagram_1_monthly_bill.pdf}
@@ -272,12 +271,18 @@ Typically, the customer trigger the pumping gas. It then chooses the payment met
 
 \subsection{A customer purchases gas and attempts to pay by credit card but his card is refused. He then pays by cash to the cashier}
 
+\begin{center}
+\includegraphics[width=17cm, height=8cm, angle=90]{credicash.pdf}
+\end{center}
+
+\newpage
 
 \subsection{The cashier successfully processes a monthly payment by credit card}
 
 
 
 \newpage
+
 \section{State diagrams}
 
 \subsection{Gas Pump Interface}
