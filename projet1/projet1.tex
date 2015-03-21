@@ -116,13 +116,13 @@
 \begin{itemize}
 \item Input :
 		\begin{itemize}
-		\item The trigger is pressed
+		\item The trigger is pressed.
 		\end{itemize}
 
 \item Output :
 		\begin{itemize}
 		\item \data{Gallons} [positive float] : Number of gallons purchased. 
-    \item \data{Dollars} [positive float, max 999,99] : Dollar amount of the purchase.
+    \item \data{Dollars} [positive float; max 999,99] : Dollar amount of the purchase.
 		\end{itemize}
 \end{itemize}
 
@@ -137,15 +137,15 @@
     \item \data{Gallons} [positive float] : Number of gallons purchased (from the Gas pump).
     \item \data{Dollars} [positive float, max 999,99] : Dollar amount of the purchase (from the Gas pump).
     \item \data{Payment Token} [integer representing a {valid, invalid} payment] : Token giving information about the payment (from the Credit Card System).
-    \item \data{Reset Token} [integer representing a reset operation] : When the token is received , the pump is reseted.
+    \item \data{Reset Token} [integer representing a reset operation] : When the token is received, the pump is reset.
     \item \data{User input} [User choices] : The user can communicate his choice of payment.
     \end{itemize}
 
 \item Output :
 		\begin{itemize}
 		\item \data{User output} [Strings] : Messages on the screen to guide the user through steps.
-    \item \data{Gallons} [positive float] : Number of gallons purchased (to the cashier interface).
-    \item \data{Dollars} [positive float, max 999,99] : Dollar amount of the purchase (to the cashier interface and to the card reader system).
+    \item \data{Gallons} [positive float] : Number of gallons purchased (to the cashier's interface).
+    \item \data{Dollars} [positive float, max 999,99] : Dollar amount of the purchase (to the cashier's interface and to the card reader system).
 		\end{itemize}
 \end{itemize}
 
@@ -224,7 +224,7 @@
 \item Output :
 		\begin{itemize}
 		\item \data{display purchase prices} : display the purchase prices.
-		\item \data{display error messages} : display an error messages (eg. if the billing account number entered is invalid).
+		\item \data{display error messages} : display an error messages (e.g. if the billing account number entered is invalid).
     \item \data{Reset Token} [integer representing a reset operation] : when the token is sent to a pump, the pump is reset.
     \item Save every purchase in a database.
 		\end{itemize}
@@ -286,8 +286,12 @@ Typically, the customer pumps some gas. He then chooses the payment method from 
 
 \newpage
 
+
 \subsection{The cashier successfully processes a monthly payment by credit card}
 
+\begin{center}
+%\includegraphics[width=17cm, height=8cm, angle=90]{credicash.pdf}
+\end{center}
 
 
 \newpage
