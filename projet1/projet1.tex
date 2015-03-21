@@ -171,6 +171,11 @@
 		\item \data{credit card number} : receive the credit card number from the gas pump interface.
 		\item \data{purchase amount} : receive the purchase amount from the gas pump interface.
 		\end{itemize}
+\item Output :
+    \begin{itemize}
+    \item \data{Validation} : Send a validation token or an error token.
+    \end{itemize}
+
 \end{itemize}
 
 
@@ -240,6 +245,11 @@ The GSCS stores the following data :
 
 \section{Data-flow diagram}
 
+Typically, the customer trigger the pumping gas. It then chooses the payment method. According to his choice, he ends up paying or giving his billing number to the cashier.
+
+\begin{center}
+\centerline{\includegraphics[width=1.4\textwidth]{dataflow_diagram.pdf}}
+\end{center}
 
 \section{Class diagram}
 
