@@ -96,17 +96,19 @@
 
 \item In the requirements, the term \textit{GSCS} is used a lot of time. We don't know if this term refers to a kind of interface or if it refers to the whole system. We'll assume that it refers to the whole system and that the cashier interface is responsible of saving all informations (does include a database).
 
-\item There is no information that indicates how the cashier knows the price that the customer has to pay at the pump. We will therefore assume that the cashier is able to have an overview of all pumps (ie. pumps send their states and informations to the cashier interface).
+\item There is no information that indicates how the cashier knows the price that the customer has to pay at the pump. We will therefore assume that the cashier is able to have an overview of all pumps (i.e. pumps send their states and informations to the cashier's interface).
 
-\item We'll assume that the cashier interface does include a credit card reader. This could be used by the customer to pay a monthly bill, since the requirement tell us that \enquote{customers can always pay via cash or credit card}.
+\item We'll assume that the cashier's interface does include a credit card reader. This could be used by the customer to pay a monthly bill, since the requirement tells that \enquote{customers can always pay via cash or credit card}.
 
-\item What are the steps to create a monthly billing account number ? We'll assume that the customer have to ask the cashier for creating a monthly billing account.
+\item What are the steps to create a monthly billing account number ? We'll assume that the customer has to ask the cashier for creating a monthly billing account.
 
-\item \enquote{the paper credit card receipt will be photocopied and stored with the rest of the year’s receipts}. This requirement is ambiguous. This action have to be managed by the cashier. We can think of being able to save the scan of the credit card receipt in the database of the system via the cashier interface.
+\item ``the paper credit card receipt will be photocopied and stored with the rest of the year’s receipts''. This requirement is ambiguous. This action has to be managed by the cashier. We can think of being able to save the scan of the credit card receipt in the database of the system via the cashier's interface.
 
 \end{itemize}
 
 
+
+\newpage
 \section{Interfaces}
 
 \subsection{Gas pump}
