@@ -1,0 +1,30 @@
+digraph G {
+	graph [overlap=false, splines=true, dpi=300, rankdir="UD"];
+	node [shape=box];
+	System -> Accountancy;
+	System -> GasPump;
+	1 [label="Interfaces"];
+	2 [label="Controllers"];
+	3 [label="Storages"];
+	4 [label="Interfaces"];
+	5 [label="Controllers"];
+	6 [label="Storages"];
+	Accountancy -> 1;
+	Accountancy -> 2;
+	Accountancy -> 3;
+	GasPump -> 4;
+	GasPump -> 5;
+	GasPump -> 6;
+	1 -> CashierInterface;
+	2 -> CashierController;
+	2 -> AccountController;
+	2 -> DevicesController;
+	DevicesController -> CreditCardReader;
+	DevicesController -> CreditCardSystem;
+	3 -> AccountancyStorage;
+
+
+	4 -> GasPumpInterface;
+	5 -> PumpController;
+	6 -> FuelStorage;
+}
