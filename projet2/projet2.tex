@@ -91,6 +91,27 @@
 
 
 \section{Architectural Design}
+\subsection{Hierarchical decomposition}
 
+\begin{center}
+\centerline{\includegraphics[width=1.3\textwidth]{hierarchical.png}}
+\end{center}
+
+\subsection{Roles and interactions}
+
+Our system is composed of two parts : ``Accountancy'' and ``Gas Pump''. The first one is related to accounting. And the second one is about the logistic of the gas pump. This hierarchy allows to easily extend the activities of \textbf{Dinoco GSCS}.\\
+
+
+
+
+In each of these two sections, we defined three components : ``Interfaces'', ``Controllers'', ``Storages''.\\
+
+
+Here are the descriptions of the system components :
+\begin{description}
+\item[CashierInterface] is responsible for displaying the graphical user interface to the cashier.
+\item[CashierController] is responsible for the interactions between the CashierInterface and the GSCS system.
+\item[AccountController] is responsible for the interactions between the and the GSCS system.
+\end{description}
 
 \end{document}
