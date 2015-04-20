@@ -138,13 +138,13 @@ Here are the descriptions of the system components :
 The CashierController is the main controller. It is the entry point of the application. It will initialize the PumpController, the AccountController, the PurchaseController and finally its interface (CashierInterface).
 
 \subsubsection*{CashierInterface}
-This class is responsible of drawing the graphical user interface for the cashier.
+This class is responsible of displaying the graphical user interface to the cashier.
 
 \subsubsection*{PurchaseFactory}
-The PurchaseController is responsible of creating and saving new Purchase. If the purchase is a CreditPurchase, the controller will interact with the CreditCardController for directly settle the payment.
+The PurchaseController is responsible of creating and saving new Purchase. If the purchase is a CreditPurchase, the controller will interact with the CreditCardController to directly settle the payment.
 
 \subsubsection*{Purchase}
-This class represents a purchase. This class is abstract.
+This abstract class represents a purchase.
 
 \subsubsection*{CreditPurchase}
 Specialized class for representing a purchase made via credit card.
@@ -165,10 +165,12 @@ This controller is responsible for creating new Account and getting existing Acc
 Class representing a customer.
 
 \subsubsection*{AccountancyStorage}
-This class is responsible of the persistence (to keep in a database) of classes : Account, Purchase and Customer.
+\settextlisting
+This class is responsible of the persistence (to keep in a database) of \mbox{classes :} Account, Purchase and Customer. \\
+It provides CRUD methods: \lstinline|create|, \lstinline|read|, \lstinline|update|, and \lstinline|destroy|.
 
 \subsubsection*{CreditCardController}
-This class will interact with the CreditCardReader and the CreditCardSystem. It will offer a simple way to to request a payment by manipulating the external APIs of the credit card company. We need to know the pumpNumber to enable the right card reader associated to a gaz pump.
+This class will interact with the CreditCardReader and the CreditCardSystem. It will offer a simple way to request a payment by manipulating the external APIs of the credit card company. We need to know the pumpNumber to enable the right card reader associated to a gas pump.
 
 \subsubsection*{CreditCardSystem}
 This class will wrap the external API of the credit card system.
@@ -177,7 +179,7 @@ This class will wrap the external API of the credit card system.
 This class will wrap the external API of the credit card reader.
 
 \subsubsection*{PumpInterface}
-This class is responsible for displaying messages and listen to choice made by the user.
+This class is responsible for displaying messages and listen to choices made by the user.
 
 \subsubsection*{PumpController}
 This controller manages everything related to the Fuel stock. Since the user can pay directly by credit card at a pump, it can call the PurchaseFactory to handle the payment.
@@ -420,7 +422,7 @@ The composite pattern allows to treat composite and non-composite components uni
 \setcodelisting
 \begin{lstlisting}
 public class Account {
-	private int number;
+	protected int number;
 	private float balance;
 	
 	public float getBalance() {
@@ -432,7 +434,6 @@ public class Account {
 
 \begin{lstlisting}
 public class CollectiveAccount extends Account {
-	private int number; // TODO: necessary?
 	List<Account> accounts;
 	// ...
 	
