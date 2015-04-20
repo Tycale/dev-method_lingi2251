@@ -115,8 +115,9 @@ In each of these two sections, we defined three main components :
 
 We added the component ``Externals'' in the section ``Accountancy'' for external devices.\\
 
+
+\subsubsection*{Descriptions of the system components}
 \settextlisting
-Here are the descriptions of the system components :
 \begin{description}
 \item[CashierInterface] is responsible for displaying the graphical user interface to the cashier.
 
@@ -127,8 +128,8 @@ Here are the descriptions of the system components :
 
 \item[CreditCardController] is responsible for the interactions between the \lstinline|CreditCardReader| and the \lstinline|CreditCardSystem|.
 
-\item[Purchase, CreditPurchase, AccountPurchase, CashPurchase] are responsible for representing data about Purchase.
-\item[Account, Customer] are responsible for representing about Account and Customer.
+\item[Purchase, CreditPurchase, AccountPurchase, CashPurchase] are responsible for representing data about purchase.
+\item[Account, Customer] are responsible for representing data about account.
 \item[CreditCardReader] is responsible for reading credit card number (wrapping the existing API for the device).
 \item[CreditCardSystem] is responsible for requesting payment (wrapping the existing system API).
 
