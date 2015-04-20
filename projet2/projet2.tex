@@ -197,6 +197,18 @@ This class is responsible of the persistence (to keep in a database) of the Fuel
 \centerline{\includegraphics[angle=90, origin=c, width=1\textwidth]{use.png}}
 \end{center}
 
+\subsubsection*{Sets of classes for an incremental development}
+We don't have any loop in our USES diagram. The incremental development below could be followed : 
+\begin{itemize}
+\item FuelStorage, AccountancyStorage, CreditCardSystem, CreditCardReader
+\item Purchase, Customer, Account, CreditCardController, Fuel
+\item CreditPurchase, AccountPurchase, CashPurchase
+\item PurchaseFactory, AccountController
+\item PumpContoller
+\item CashierController, PumpInterface
+\item CashierInterface
+\end{itemize}
+
 \subsection*{Design Patterns}
 
 \subsubsection{Template Method}
