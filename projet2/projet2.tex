@@ -20,9 +20,10 @@
 	commentstyle=\color{green!90!black},
 	frame=single,
 	keywordstyle=\bfseries\color{blue},
-	language=python,
+	language=Java,
 	numberstyle=\color{gray},
-%	tabsize=2,
+	showstringspaces=false,
+	tabsize=4,
 }
 
 
@@ -38,6 +39,9 @@
 
 \newcommand{\data}[1]{\textit{#1}}
 \newcommand{\state}[1]{\textsf{#1}}
+
+\newcommand{\settextlisting}{\lstset{ basicstyle=\small\ttfamily }}
+\newcommand{\setcodelisting}{\lstset{ basicstyle=\footnotesize\ttfamily }}
 
 
 
@@ -121,6 +125,7 @@ Here are the descriptions of the system components :
 \item[FuelStorage] is responsible for storing the fuel informations.
 \end{description}
 
+
 \section{Detailed design}
 \subsection*{Class diagram}
 
@@ -179,5 +184,265 @@ Class for representing fuel stock.
 
 \subsubsection*{FuelStorage}
 This class is responsible of the persistence (to keep in a database) of the Fuel stock.
+
+
+
+
+\subsection*{Design Patterns}
+
+\subsubsection{Template Method}
+
+\includegraphics[width=\textwidth]{TemplateMethodPattern.png}
+
+\medskip
+\settextlisting
+Any instance of \lstinline|Payment| has a method \lstinline|getReceipt()| that produces a printable receipt for the payment.
+This method calls the \lstinline|getPaymentType()| method that subclasses of \lstinline|Payment| must implement.
+
+
+\bigskip
+\lstset{%
+	basicstyle=\scriptsize\ttfamily,
+}
+
+\begin{lstlisting}
+public abstract class Payment {
+	public String getReceipt() {
+		return "Payment by "+getPaymentType()+": "+this.price+"$";
+	}
+	
+	public abstract String getPaymentType();
+}
+\end{lstlisting}
+
+
+\begin{lstlisting}
+class CheckPayment extends Payment {
+	// ...
+	private String getPaymentType() {
+		return "check";
+	}
+	// ...
+}
+\end{lstlisting}
+
+
+\begin{lstlisting}
+class CreditPayment extends Payment {
+	// ...
+	private String getPaymentType() {
+		return "credit card";
+	}
+	// ...
+}
+\end{lstlisting}
+
+
+
+
+\subsubsection{Strategy pattern}
+
+\centerline{\includegraphics[width=0.9\textwidth]{StrategyPattern.png}}
+
+\medskip
+\settextlisting
+The \lstinline|Reporting| interface advertises the \lstinline|printReport| method.
+Each of the classes implementing \lstinline|Reporting| must define its own \lstinline|printReport| method.
+
+\bigskip
+%\setcodelisting
+\lstset{ basicstyle=\scriptsize\ttfamily }
+\begin{lstlisting}
+public interface Reporting {
+	public String printReport();
+}
+\end{lstlisting}
+
+
+\begin{lstlisting}
+public class Account implements Reporting {
+	// ...
+	public String printReport () {
+		String report = "";
+		List<Payment> payments = getPayments();
+		for (Payment p : payments) {
+			report += p.printReport()+"\n";
+		}
+		return report;
+	}
+	// ...
+}
+\end{lstlisting}
+
+
+\begin{lstlisting}
+public class Payment implements Reporting {
+	// ...
+	public String printReport () {
+		String report = "Payment informations:\n"
+					   +"Date: "+getDate()+"\n"
+					   +"Amount: "+getTotalPrice()+"\n";
+		return report;
+	}
+	// ...
+}
+
+\end{lstlisting}
+
+
+
+
+\subsubsection{Decorator pattern}
+
+
+\includegraphics[width=\textwidth]{DecoratorPattern.png}
+
+\medskip
+\settextlisting
+The \lstinline|PurchaseDecorator| class inherits from \lstinline|Purchase|, and contains a \lstinline|Purchase| object.
+Classes that inherit from \lstinline|PurchaseDecorator| can add or remove functionalities at runtime.
+
+\bigskip
+\setcodelisting
+\begin{lstlisting}
+public class Purchase {
+	// ...
+}
+\end{lstlisting}
+
+
+\begin{lstlisting}
+public abstract class PurchaseDecorator extends Purchase {
+	protected Purchase purchase;
+	
+	public PurchaseDecorator (Purchase p) {
+		this.purchase = p;
+	}
+	
+	public abstract float processFee();
+}
+\end{lstlisting}
+
+
+\begin{lstlisting}
+public class CashPurchase extends PurchaseDecorator {
+	// ...
+	public float processFee() {
+		return getTotalPrice() + 0.50;
+	}
+}
+\end{lstlisting}
+
+
+\begin{lstlisting}
+public class CreditPurchase extends PurchaseDecorator {
+	// ...
+	public float processFee() {
+		return getTotalPrice() * 1.05;
+	}
+}
+\end{lstlisting}
+
+
+
+
+\subsubsection{Observer Pattern}
+
+\includegraphics[width=\textwidth]{ObserverPattern.png}
+
+\settextlisting
+The \lstinline|GasPump| has a collection of \lstinline|PumpObserver|.
+When the customer hangs up the nozzle, the \lstinline|GasPump| executes the \lstinline|notifyObservers| method, which is responsible for notifying to the observers the amount and the price of gas that the customer dispensed.
+
+\bigskip
+\setcodelisting
+%\lstset{ basicstyle=\scriptsize\ttfamily }
+\begin{lstlisting}
+public class GasPump {
+	private List<PumpObserver> pumpObservers;
+	// ...
+	public void registerObserver(PumpObserver po) {
+		this.pumpObservers.add(po);
+	}
+	
+	public void notifyObservers () {
+		float dispensedGasAmount = getDispensedGasAmount();
+		float dispensedGasPrice = getDispensedGasPrice();
+		for (PumpObserver po : this.pumpObservers) {
+			po.notify(dispensedGasAmount, dispensedGasPrice);
+		}
+	}
+}
+\end{lstlisting}
+
+
+\begin{lstlisting}
+public interface PumpObserver {
+	public void notify(float gasAmount, float gasPrice);
+}
+\end{lstlisting}
+
+
+\begin{lstlisting}
+public class Purchase implements PumpObserver {
+	// ...
+	public void notify (float gasAmount, float gasPrice) {
+		// ...
+	}
+}
+\end{lstlisting}
+
+
+\begin{lstlisting}
+public class Inventory implements PumpObserver {
+	// ...
+	public void notify (float gasAmount, float gasPrice) {
+		// ...
+	}
+}
+\end{lstlisting}
+
+
+
+
+\subsubsection{Composite Pattern}
+
+\centerline{\includegraphics[height=9cm]{CompositePattern.png}}
+
+\settextlisting
+The \lstinline|CollectiveAccount| is at the same time an \lstinline|Account|, but also an aggregation of \lstinline|Account|s.
+The composite pattern allows to treat composite and non-composite components uniformly.
+
+\bigskip
+\setcodelisting
+\begin{lstlisting}
+public class Account {
+	private int number;
+	private float balance;
+	
+	public float getBalance() {
+		return this.balance;
+	}
+}
+\end{lstlisting}
+
+
+\begin{lstlisting}
+public class CollectiveAccount extends Account {
+	private int number; // TODO: necessary?
+	List<Account> accounts;
+	// ...
+	
+	public float getBalance() {
+		float total = 0.0;
+		for (Account a : accounts) {
+			total += a.getBalance();
+		}
+		return total;
+	}
+}
+\end{lstlisting}
+
+
 
 \end{document}
