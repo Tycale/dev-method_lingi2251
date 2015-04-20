@@ -98,7 +98,7 @@
 \subsection{Hierarchical decomposition}
 
 \begin{center}
-\centerline{\includegraphics[width=1\textwidth]{hierarchical.png}}
+\centerline{\includegraphics[width=0.7\textwidth]{hierarchical.png}}
 \end{center}
 
 \subsection{Roles and interactions}
@@ -106,24 +106,35 @@
 Our system is composed of two parts : ``Accountancy'' and ``Gas Pump''. The first one is related to accounting. And the second one is about the logistic of the gas pump. This hierarchy allows to easily extend the activities of \textbf{Dinoco GSCS}.\\
 
 
-In each of these two sections, we defined three main components : ``Interfaces'', ``Controllers'', ``Models''. \\
+In each of these two sections, we defined three main components : 
+\begin{description}
+\item[Interfaces] will contain components that will interact with the user (GUI, buttons).
+\item[Controllers] will be responsible of interactions between components.
+\item[Models] will contain data.
+\end{description}
+
+We added the component ``Externals'' in the section ``Accountancy'' for external devices.\\
 
 \settextlisting
 Here are the descriptions of the system components :
 \begin{description}
 \item[CashierInterface] is responsible for displaying the graphical user interface to the cashier.
+
+\item[AccountController] is responsible for the access to accounts informations.
+
+
+\item[CashierController] is responsible for the interactions between the \lstinline|CashierInterface| and the \lstinline|AccountController| (e.g. open a monthly bill, pay a monthly bill, etc.). It also permits the cashier to check the fuel stock from the \lstinline|PumpController|.
+
 \item[CreditCardController] is responsible for the interactions between the \lstinline|CreditCardReader| and the \lstinline|CreditCardSystem|.
+
+\item[Purchase, CreditPurchase, AccountPurchase, CashPurchase] are responsible for representing data about Purchase.
+\item[Account, Customer] are responsible for representing about Account and Customer.
 \item[CreditCardReader] is responsible for reading credit card number (wrapping the existing API for the device).
 \item[CreditCardSystem] is responsible for requesting payment (wrapping the existing system API).
 
-\item[AccountController] is responsible for the access to accounts informations (relation to \lstinline|AccountancyStorage|).
-\item[CashierController] is responsible for the interactions between the \lstinline|CashierInterface| and the \lstinline|AccountController| (e.g. open a monthly bill, pay a monthly bill, etc.). It also permits the cashier to check the fuel stock from the \lstinline|PumpController| (which will retrieve the information from the \lstinline|FuelStorage|).
-
-\item[AccountancyStorage] is responsible for storing the accounts informations.
-
 \item[PumpInterface] is responsible for displaying informations to the customer.
 \item[PumpController] is responsible for the interactions between the \lstinline|PumpInterface| and the Dinoco GSCS.
-\item[FuelStorage] is responsible for storing the fuel informations.
+\item[FuelStock] is responsible for representing data about fuel.
 \end{description}
 
 \section{Detailed design}
