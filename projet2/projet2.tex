@@ -108,12 +108,12 @@ Our system is composed of two parts : ``Accountancy'' and ``Gas Pump''. The firs
 
 In each of these two sections, we defined three main components : 
 \begin{description}
-\item[Interfaces] will contain components that will interact with the user (GUI, buttons).
-\item[Controllers] will be responsible of interactions between components.
-\item[Models] will contain data.
+\item[Interfaces] contains components that will interact with the user (GUI, buttons).
+\item[Controllers] is responsible of interactions between components.
+\item[Models] contains data.
 \end{description}
 
-We added the component ``Externals'' in the section ``Accountancy'' for external devices.\\
+We added the component ``Externals'' in the section ``Accountancy'' for the external devices. \\
 
 
 \subsubsection*{Descriptions of the system components}
@@ -128,8 +128,9 @@ We added the component ``Externals'' in the section ``Accountancy'' for external
 
 \item[CreditCardController] is responsible for the interactions between the \lstinline|CreditCardReader| and the \lstinline|CreditCardSystem|.
 
+
 \item[Purchase, CreditPurchase, AccountPurchase, CashPurchase] are responsible for representing data about purchase.
-\item[Account, Customer] are responsible for representing data about account.
+\item[Account, Customer] are responsible for representing data about accounts.
 \item[CreditCardReader] is responsible for reading credit card number (wrapping the existing API for the device).
 \item[CreditCardSystem] is responsible for requesting payment (wrapping the existing system API).
 
@@ -166,7 +167,7 @@ This abstract class represents a purchase.
 Specialized class for representing a purchase made via credit card.
 
 \subsubsection*{AccountPurchase}
-Specialized class for representing a purchase that is not directly paid. The purchase will be associated to a monthly bill account (\lstinline|Account| class).
+Specialized class for representing a purchase that is not paid immediately. The purchase will be associated to a monthly bill account (\lstinline|Account| class).
 
 \subsubsection*{CashPurchase}
 Specialized class for representing a purchase made via cash.
@@ -183,7 +184,7 @@ Class representing a customer.
 \subsubsection*{AccountancyStorage}
 \settextlisting
 This class is responsible of the persistence (to keep in a database) of \mbox{classes :} \lstinline|Account|, \lstinline|Purchase| and \lstinline|Customer|. \\
-It provides CRUD methods: \lstinline|create|, \lstinline|read|, \lstinline|update|, and \lstinline|destroy|.
+It provides CRUD methods: \lstinline|create|, \lstinline|read|, \lstinline|update|, and \lstinline|delete|.
 
 \subsubsection*{CreditCardController}
 This class will interact with the \lstinline|CreditCardReader| and the \lstinline|CreditCardSystem|.
@@ -217,7 +218,7 @@ This class is responsible of the persistence (to keep in a database) of the \lst
 
 
 \subsubsection*{Sets of classes for an incremental development}
-We don't have any loop in our USES diagram. The incremental development below could be followed : 
+We do not have any loop in our USES diagram. The incremental development below could be followed :
 \begin{itemize}
 \item FuelStorage, AccountancyStorage, CreditCardSystem, CreditCardReader
 \item Purchase, Customer, Account, CreditCardController, Fuel
@@ -228,9 +229,12 @@ We don't have any loop in our USES diagram. The incremental development below co
 \item CashierInterface
 \end{itemize}
 
+
+
+\newpage
 \subsection*{Design Patterns}
 
-\subsubsection{Template Method}
+\subsubsection*{Template Method}
 
 \includegraphics[width=\textwidth]{TemplateMethodPattern.png}
 
@@ -280,7 +284,7 @@ class CreditPayment extends Payment {
 
 
 
-\subsubsection{Strategy pattern}
+\subsubsection*{Strategy pattern}
 
 \centerline{\includegraphics[width=0.9\textwidth]{StrategyPattern.png}}
 
@@ -332,7 +336,7 @@ public class Payment implements Reporting {
 
 
 
-\subsubsection{Decorator pattern}
+\subsubsection*{Decorator pattern}
 
 
 \includegraphics[width=\textwidth]{DecoratorPattern.png}
@@ -386,7 +390,7 @@ public class CreditPurchase extends PurchaseDecorator {
 
 
 
-\subsubsection{Observer Pattern}
+\subsubsection*{Observer Pattern}
 
 \includegraphics[width=\textwidth]{ObserverPattern.png}
 
@@ -444,8 +448,8 @@ public class Inventory implements PumpObserver {
 
 
 
-
-\subsubsection{Composite Pattern}
+\newpage
+\subsubsection*{Composite Pattern}
 
 \centerline{\includegraphics[height=9cm]{CompositePattern.png}}
 
