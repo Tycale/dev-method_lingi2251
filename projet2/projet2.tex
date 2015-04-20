@@ -106,22 +106,20 @@
 Our system is composed of two parts : ``Accountancy'' and ``Gas Pump''. The first one is related to accounting. And the second one is about the logistic of the gas pump. This hierarchy allows to easily extend the activities of \textbf{Dinoco GSCS}.\\
 
 
+In each of these two sections, we defined three main components : ``Interfaces'', ``Controllers'', ``Storages''. \\
 
-
-In each of these two sections, we defined three main components : ``Interfaces'', ``Controllers'', ``Storages''.\\
-
-
+\settextlisting
 Here are the descriptions of the system components :
 \begin{description}
 \item[CashierInterface] is responsible for displaying the graphical user interface to the cashier.
-\item[AccountController] is responsible for the access to accounts informations (relation to AccountancyStorage).
-\item[CashierController] is responsible for the interactions between the CashierInterface and the AccountController (e.g. open a monthly bill, pay a monthly bill, etc.). It also permits the cashier to check the fuel stock from the PumpController (which will retrieve the information from the FuelStorage). 
-\item[DevicesController] is responsible for the interactions between the CreditCardReader and the CreditCardSystem. 
+\item[AccountController] is responsible for the access to accounts informations (relation to \lstinline|AccountancyStorage|).
+\item[CashierController] is responsible for the interactions between the \lstinline|CashierInterface| and the \lstinline|AccountController| (e.g. open a monthly bill, pay a monthly bill, etc.). It also permits the cashier to check the fuel stock from the \lstinline|PumpController| (which will retrieve the information from the \lstinline|FuelStorage|).
+\item[DevicesController] is responsible for the interactions between the \lstinline|CreditCardReader| and the \lstinline|CreditCardSystem|.
 \item[AccountancyStorage] is responsible for storing the accounts informations.
 \item[CreditCardReader] is responsible for reading credit card number (wrapping the existing API for the device).
 \item[CreditCardSystem] is responsible for requesting payment (wrapping the existing system API).
 \item[PumpInterface] is responsible for displaying informations to the customer.
-\item[PumpController] is responsible for the interactions between the PumpInterface and the Dinoco GSCS.
+\item[PumpController] is responsible for the interactions between the \lstinline|PumpInterface| and the Dinoco GSCS.
 \item[FuelStorage] is responsible for storing the fuel informations.
 \end{description}
 
@@ -134,14 +132,17 @@ Here are the descriptions of the system components :
 
 \subsection*{Short description}
 
+\settextlisting
+
 \subsubsection*{CashierController}
-The CashierController is the main controller. It is the entry point of the application. It will initialize the PumpController, the AccountController, the PurchaseController and finally its interface (CashierInterface).
+The \lstinline|CashierController| is the main controller. It is the entry point of the application. It will initialize the \lstinline|PumpController|, the \lstinline|AccountController|, the \lstinline|PurchaseController| and finally its interface (\lstinline|CashierInterface|).
 
 \subsubsection*{CashierInterface}
 This class is responsible of displaying the graphical user interface to the cashier.
 
 \subsubsection*{PurchaseFactory}
-The PurchaseController is responsible of creating and saving new Purchase. If the purchase is a CreditPurchase, the controller will interact with the CreditCardController to directly settle the payment.
+The \lstinline|PurchaseController| is responsible of creating and saving new \lstinline|Purchase|.
+If the purchase is a \lstinline|CreditPurchase|, the controller will interact with the \lstinline|CreditCardController| to directly settle the payment.
 
 \subsubsection*{Purchase}
 This abstract class represents a purchase.
@@ -150,7 +151,7 @@ This abstract class represents a purchase.
 Specialized class for representing a purchase made via credit card.
 
 \subsubsection*{AccountPurchase}
-Specialized class for representing a purchase that is not directly paid. The purchase will be associated to a monthly bill account (Account class).
+Specialized class for representing a purchase that is not directly paid. The purchase will be associated to a monthly bill account (\lstinline|Account| class).
 
 \subsubsection*{CashPurchase}
 Specialized class for representing a purchase made via cash.
@@ -159,18 +160,20 @@ Specialized class for representing a purchase made via cash.
 This class is responsible for keeping up to date the accountancy of a customer.
 
 \subsubsection*{AccountController}
-This controller is responsible for creating new Account and getting existing Account.
+This controller is responsible for creating new \lstinline|Account| and getting existing \lstinline|Account|.
 
 \subsubsection*{Customer}
 Class representing a customer.
 
 \subsubsection*{AccountancyStorage}
 \settextlisting
-This class is responsible of the persistence (to keep in a database) of \mbox{classes :} Account, Purchase and Customer. \\
+This class is responsible of the persistence (to keep in a database) of \mbox{classes :} \lstinline|Account|, \lstinline|Purchase| and \lstinline|Customer|. \\
 It provides CRUD methods: \lstinline|create|, \lstinline|read|, \lstinline|update|, and \lstinline|destroy|.
 
 \subsubsection*{CreditCardController}
-This class will interact with the CreditCardReader and the CreditCardSystem. It will offer a simple way to request a payment by manipulating the external APIs of the credit card company. We need to know the pumpNumber to enable the right card reader associated to a gas pump.
+This class will interact with the \lstinline|CreditCardReader| and the \lstinline|CreditCardSystem|.
+It will offer a simple way to request a payment by manipulating the external APIs of the credit card company.
+We need to know the \lstinline|pumpNumber| to enable the right card reader associated to a gas pump.
 
 \subsubsection*{CreditCardSystem}
 This class will wrap the external API of the credit card system.
@@ -182,13 +185,13 @@ This class will wrap the external API of the credit card reader.
 This class is responsible for displaying messages and listen to choices made by the user.
 
 \subsubsection*{PumpController}
-This controller manages everything related to the Fuel stock. Since the user can pay directly by credit card at a pump, it can call the PurchaseFactory to handle the payment.
+This controller manages everything related to the \lstinline|Fuel| stock. Since the user can pay directly by credit card at a pump, it can call the \lstinline|PurchaseFactory| to handle the payment.
 
 \subsubsection*{Fuel}
 Class for representing fuel stock.
 
 \subsubsection*{FuelStorage}
-This class is responsible of the persistence (to keep in a database) of the Fuel stock.
+This class is responsible of the persistence (to keep in a database) of the \lstinline|Fuel| stock.
 
 
 \subsection*{USES diagram}
@@ -196,6 +199,7 @@ This class is responsible of the persistence (to keep in a database) of the Fuel
 \begin{center}
 \centerline{\includegraphics[angle=90, origin=c, width=1\textwidth]{use.png}}
 \end{center}
+
 
 \subsubsection*{Sets of classes for an incremental development}
 We don't have any loop in our USES diagram. The incremental development below could be followed : 
