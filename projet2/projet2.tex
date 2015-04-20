@@ -112,12 +112,15 @@ In each of these two sections, we defined three main components : ``Interfaces''
 Here are the descriptions of the system components :
 \begin{description}
 \item[CashierInterface] is responsible for displaying the graphical user interface to the cashier.
-\item[AccountController] is responsible for the access to accounts informations (relation to \lstinline|AccountancyStorage|).
-\item[CashierController] is responsible for the interactions between the \lstinline|CashierInterface| and the \lstinline|AccountController| (e.g. open a monthly bill, pay a monthly bill, etc.). It also permits the cashier to check the fuel stock from the \lstinline|PumpController| (which will retrieve the information from the \lstinline|FuelStorage|).
-\item[DevicesController] is responsible for the interactions between the \lstinline|CreditCardReader| and the \lstinline|CreditCardSystem|.
-\item[AccountancyStorage] is responsible for storing the accounts informations.
+\item[CreditCardController] is responsible for the interactions between the \lstinline|CreditCardReader| and the \lstinline|CreditCardSystem|.
 \item[CreditCardReader] is responsible for reading credit card number (wrapping the existing API for the device).
 \item[CreditCardSystem] is responsible for requesting payment (wrapping the existing system API).
+
+\item[AccountController] is responsible for the access to accounts informations (relation to \lstinline|AccountancyStorage|).
+\item[CashierController] is responsible for the interactions between the \lstinline|CashierInterface| and the \lstinline|AccountController| (e.g. open a monthly bill, pay a monthly bill, etc.). It also permits the cashier to check the fuel stock from the \lstinline|PumpController| (which will retrieve the information from the \lstinline|FuelStorage|).
+
+\item[AccountancyStorage] is responsible for storing the accounts informations.
+
 \item[PumpInterface] is responsible for displaying informations to the customer.
 \item[PumpController] is responsible for the interactions between the \lstinline|PumpInterface| and the Dinoco GSCS.
 \item[FuelStorage] is responsible for storing the fuel informations.

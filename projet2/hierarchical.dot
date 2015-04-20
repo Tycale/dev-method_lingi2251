@@ -6,14 +6,12 @@ digraph G {
 	1 [label="Interfaces"];
 	2 [label="Controllers"];
 	3 [label="Models"];
-	7 [label="CreditCardController"];
+	7 [label="Externals"];
 
 	Accountancy -> 1;
 	Accountancy -> 2;
 	Accountancy -> 3;
-
-
-	2 -> 7;
+	Accountancy -> 7;
 
 	7 -> CreditCardReader;
 	7 -> CreditCardSystem;
@@ -21,6 +19,7 @@ digraph G {
 	2 -> AccountController;
 	//2 -> PurchaseFactory;
 	2 -> CashierController;
+	2 -> CreditCardController;
 
 	3 -> Purchase;
 	3 -> CreditPurchase;
