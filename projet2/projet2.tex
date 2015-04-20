@@ -104,14 +104,80 @@ Our system is composed of two parts : ``Accountancy'' and ``Gas Pump''. The firs
 
 
 
-In each of these two sections, we defined three components : ``Interfaces'', ``Controllers'', ``Storages''.\\
+In each of these two sections, we defined three main components : ``Interfaces'', ``Controllers'', ``Storages''.\\
 
 
 Here are the descriptions of the system components :
 \begin{description}
 \item[CashierInterface] is responsible for displaying the graphical user interface to the cashier.
-\item[CashierController] is responsible for the interactions between the CashierInterface and the GSCS system.
-\item[AccountController] is responsible for the interactions between the and the GSCS system.
+\item[AccountController] is responsible for the access to accounts informations (relation to AccountancyStorage).
+\item[CashierController] is responsible for the interactions between the CashierInterface and the AccountController (e.g. open a monthly bill, pay a monthly bill, etc.). It also permits the cashier to check the fuel stock from the PumpController (which will retrieve the information from the FuelStorage). 
+\item[DevicesController] is responsible for the interactions between the CreditCardReader and the CreditCardSystem. 
+\item[AccountancyStorage] is responsible for storing the accounts informations.
+\item[CreditCardReader] is responsible for reading credit card number (wrapping the existing API for the device).
+\item[CreditCardSystem] is responsible for requesting payment (wrapping the existing system API).
+\item[PumpInterface] is responsible for displaying informations to the customer.
+\item[PumpController] is responsible for the interactions between the PumpInterface and the Dinoco GSCS.
+\item[FuelStorage] is responsible for storing the fuel informations.
 \end{description}
+
+\section{Detailed design}
+\subsection*{Class diagram}
+
+\subsection*{short description}
+
+\subsubsection*{CashierController}
+The CashierController is the main controller. It is the entry point of the application. It will initialize the PumpController, the AccountController, the PurchaseController and finally its interface (CashierInterface).
+
+\subsubsection*{CashierInterface}
+This class is responsible of drawing the graphical user interface for the cashier.
+
+\subsubsection*{PurchaseFactory}
+The PurchaseController is responsible of creating and saving new Purchase. If the purchase is a CreditPurchase, the controller will interact with the CreditCardController for directly settle the payment.
+
+\subsubsection*{Purchase}
+This class represents a purchase. This class is abstract.
+
+\subsubsection*{CreditPurchase}
+Specialized class for representing a purchase made via credit card.
+
+\subsubsection*{AccountPurchase}
+Specialized class for representing a purchase that is not directly paid. The purchase will be associated to a monthly bill account (Account class).
+
+\subsubsection*{CashPurchase}
+Specialized class for representing a purchase made via cash.
+
+\subsubsection*{Account}
+This class is responsible for keeping up to date the accountancy of a customer.
+
+\subsubsection*{AccountController}
+This controller is responsible for creating new Account and getting existing Account.
+
+\subsubsection*{Customer}
+Class representing a customer.
+
+\subsubsection*{AccountancyStorage}
+This class is responsible of the persistence (to keep in a database) of classes : Account, Purchase and Customer.
+
+\subsubsection*{CreditCardController}
+This class will interact with the CreditCardReader and the CreditCardSystem. It will offer a simple way to to request a payment by manipulating the external APIs of the credit card company. We need to know the pumpNumber to enable the right card reader associated to a gaz pump.
+
+\subsubsection*{CreditCardSystem}
+This class will wrap the external API of the credit card system.
+
+\subsubsection*{CreditCardReader}
+This class will wrap the external API of the credit card reader.
+
+\subsubsection*{PumpInterface}
+This class is responsible for displaying messages and listen to choice made by the user.
+
+\subsubsection*{PumpController}
+This controller manages everything related to the Fuel stock. Since the user can pay directly by credit card at a pump, it can call the PurchaseFactory to handle the payment.
+
+\subsubsection*{Fuel}
+Class for representing fuel stock.
+
+\subsubsection*{FuelStorage}
+This class is responsible of the persistence (to keep in a database) of the Fuel stock.
 
 \end{document}

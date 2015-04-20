@@ -6,12 +6,14 @@ digraph G {
 	1 [label="Interfaces"];
 	2 [label="Controllers"];
 	3 [label="Storages"];
+	7 [label="ExternalSystems"];
 	4 [label="Interfaces"];
 	5 [label="Controllers"];
 	6 [label="Storages"];
 	Accountancy -> 1;
 	Accountancy -> 2;
 	Accountancy -> 3;
+	Accountancy -> 7;
 	GasPump -> 4;
 	GasPump -> 5;
 	GasPump -> 6;
@@ -19,12 +21,12 @@ digraph G {
 	2 -> CashierController;
 	2 -> AccountController;
 	2 -> DevicesController;
-	DevicesController -> CreditCardReader;
-	DevicesController -> CreditCardSystem;
+	7 -> CreditCardReader;
+	7 -> CreditCardSystem;
 	3 -> AccountancyStorage;
 
 
-	4 -> GasPumpInterface;
+	4 -> PumpInterface;
 	5 -> PumpController;
 	6 -> FuelStorage;
 }
